@@ -127,8 +127,9 @@ GardenLoveMachine.launch = function(){
 				father: 'brownMold'
 			},
 		//white chocoroot: 1 chocoroot, 1x white mildew (immature)
-			'whiteChocoroot'].mother: 'bakerWheat',
-			'whiteChocoroot'].father: 'brownMold'
+			'whiteChocoroot':{
+				mother: 'bakerWheat',
+				father: 'brownMold'
 			},
 		//thumbcorn: 2 wheat
 			'thumbcorn':{
