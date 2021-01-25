@@ -4,7 +4,7 @@
 if(GardenLoveMachine === undefined) var GardenLoveMachine = {};
 if(typeof CCSE == 'undefined') Game.LoadMod('https://klattmose.github.io/CookieClicker/CCSE.js');
 GardenLoveMachine.name = 'Garden Love Machine';
-GardenLoveMachine.version = '3.14';
+GardenLoveMachine.version = '0.01';
 GardenLoveMachine.GameVersion = '2.031';
 
 GardenLoveMachine.launch = function(){
