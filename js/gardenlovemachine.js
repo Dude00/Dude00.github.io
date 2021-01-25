@@ -382,7 +382,7 @@ GardenLoveMachine.launch = function(){
 					var tile = M.getTile(x,y);
 					return (tile[0]-1) == M.plants[i].id;
 				});
-				if (!plantCheck) then return i;
+				if (!plantCheck) return i;
 			}
 		}
 		return 'none';
