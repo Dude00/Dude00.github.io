@@ -461,8 +461,8 @@ GardenLoveMachine.launch = function(){
 		for (var i in GardenLoveMachine.recipes)
 		{
 			var M = GardenLoveMachine.M;
-			if(i].valid && !M.plants[i].unlocked){
-				if(i].none) return i;
+			if(GardenLoveMachine.recipes[i].valid && !M.plants[i].unlocked){
+				if(GardenLoveMachine.recipes[i].none) return i;
 				var plantCheck = GardenLoveMachine.forEachTile(function(x,y){
 					var M = GardenLoveMachine.M;
 					var tile = M.getTile(x,y);
