@@ -285,7 +285,7 @@ GardenLoveMachine.launch = function(){
 	}
 	
 	//helper functions, we're going to be doing this a lot
-	GardenLoveMachine.forEachTile(callback) {
+	GardenLoveMachine.forEachTile = function(callback) {
 		var result = false;
 		for (let x=0; x<6; x++) {
 			for (let y=0; y<6; y++) {
@@ -297,7 +297,7 @@ GardenLoveMachine.launch = function(){
 		return result;
 	}
 	
-	GardenLoveMachine.forEachPlot(callback,offsetX,offsetY) {
+	GardenLoveMachine.forEachPlot = function(callback,offsetX,offsetY) {
 		var result = false;
 		for (let x=offsetX; x<offsetX+3; x++) {
 			for (let y=offsetY,; y<offsetY+3; y++) {
@@ -309,7 +309,7 @@ GardenLoveMachine.launch = function(){
 		return result;
 	}
 	
-	GardenLoveMachine.forEachPlotAnd(callback,offsetX,offsetY) {
+	GardenLoveMachine.forEachPlotAnd = function(callback,offsetX,offsetY) {
 		var result = false;
 		for (let x=offsetX; x<offsetX+3; x++) {
 			for (let y=offsetY,; y<offsetY+3; y++) {
