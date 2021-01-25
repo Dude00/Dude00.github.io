@@ -408,10 +408,10 @@ GardenLoveMachine.launch = function(){
 		GardenLoveMachine.forEachPlot(function(x,y){GardenLoveMachine.data.planterPlot[x][y] = -1;}, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
 		if (GardenLoveMachine.data.plotRecipe[i].none) return;
 		if (GardenLoveMachine.data.plotRecipe[i].fill) {
-			GardenLoveMachine.forEachPlot((function(x,y){GardenLoveMachine.data.planterPlot[x][y] = M.plants[GardenLoveMachine.data.plotRecipe[i].mother].id;}, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
+			GardenLoveMachine.forEachPlot(function(x,y){GardenLoveMachine.data.planterPlot[x][y] = M.plants[GardenLoveMachine.data.plotRecipe[i].mother].id;}, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
 		}
 		else if (GardenLoveMachine.data.plotRecipe[i].juicy) {
-			GardenLoveMachine.forEachPlot((function(x,y){GardenLoveMachine.data.planterPlot[x][y] = M.plants[GardenLoveMachine.data.plotRecipe[i].mother].id;}, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
+			GardenLoveMachine.forEachPlot(function(x,y){GardenLoveMachine.data.planterPlot[x][y] = M.plants[GardenLoveMachine.data.plotRecipe[i].mother].id;}, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
 			GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][1+GardenLoveMachine.plotOffY[i]] = -1;
 		}
 		else if (GardenLoveMachine.data.plotRecipe[i].shriek) {
