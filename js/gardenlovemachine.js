@@ -24,8 +24,6 @@ GardenLoveMachine.launch = function(){
 		Game.customOptionsMenu.push(function(){
 			CCSE.AppendCollapsibleOptionsMenu(GardenLoveMachinename, GardenLoveMachinegetMenuString());
 		});
-
-		GardenLoveMachine.recipes = {};
 		
 		CCSE.MinigameReplacer(function(){
 			var objKey = 'Farm';
@@ -63,159 +61,227 @@ GardenLoveMachine.launch = function(){
 		var M = GardenLoveMachine.M;
 		
 		//special cases
-		
+		GardenLoveMachine.recipes = {
 		//the "none" recipe, to be handed out when there are no valid recipes
-		GardenLoveMachine.recipes['none'].valid = function(){return true;};
-		GardenLoveMachine.recipes['none'].recipeTime = 0;
-		GardenLoveMachine.recipes['none'].none = true;
-		//meddleweed = fresh air
-		GardenLoveMachine.recipes['meddleweed'].valid = function(){return true;};
-		GardenLoveMachine.recipes['meddleweed'].recipeTime = GardenLoveMachine.calculateRecipeTime(['meddleweed']);
-		GardenLoveMachine.recipes['meddleweed'].meddleweed = true;
-		//brown mold = harvest meddleweed
-		GardenLoveMachine.recipes['brownMold'].valid = function(){return M.plants['meddleweed'].unlocked;};
-		GardenLoveMachine.recipes['brownMold'].recipeTime = GardenLoveMachine.calculateRecipeTime(['brownMold', 'meddleweed']);
-		GardenLoveMachine.recipes['brownMold'].fill = true;
-		GardenLoveMachine.recipes['brownMold'].mother = 'meddleweed';
-		//crumbspore = harvest meddleweed
-		GardenLoveMachine.recipes['crumbspore'].valid = function(){return M.plants['meddleweed'].unlocked;};
-		GardenLoveMachine.recipes['crumbspore'].recipeTime = GardenLoveMachine.calculateRecipeTime(['crumbspore', 'meddleweed']);
-		GardenLoveMachine.recipes['crumbspore'].fill = true;
-		GardenLoveMachine.recipes['crumbspore'].mother = 'meddleweed';
-		//juicy queenbeet = 8 queenbeet
-		GardenLoveMachine.recipes['queenbeetLump'].valid = function(){return M.plants['queenbeet'].unlocked;};
-		GardenLoveMachine.recipes['queenbeetLump'].recipeTime = GardenLoveMachine.calculateRecipeTime(['queenbeetLump', 'queenbeet']);
-		GardenLoveMachine.recipes['queenbeetLump'].juicy = true;
-		GardenLoveMachine.recipes['queenbeetLump'].mother = 'queenbeet';
-		//shriekbulb = 3 duketater (immature)
-		GardenLoveMachine.recipes['shriekbulb'].valid = function(){return (M.plants['duketater'].unlocked && M.plants['queenbeetLump'].unlocked);}; //defer until we have a juicy
-		GardenLoveMachine.recipes['shriekbulb'].recipeTime = GardenLoveMachine.calculateRecipeTime(['shriekbulb', 'duketater']);
-		GardenLoveMachine.recipes['shriekbulb'].shriek = true;
-		GardenLoveMachine.recipes['shriekbulb'].mother = 'duketater';
-		//everdaisy = 3 tidygrass, 3 elderwort
-		GardenLoveMachine.recipes['everdaisy'].valid = function(){return (M.plants['duketater'].unlocked && M.plants['queenbeetLump'].unlocked);};
-		GardenLoveMachine.recipes['everdaisy'].recipeTime = GardenLoveMachine.calculateRecipeTime(['everdaisy', 'tidygrass']);
-		GardenLoveMachine.recipes['everdaisy'].boxcars = true;
-		GardenLoveMachine.recipes['everdaisy'].mother = 'tidygrass';
-		GardenLoveMachine.recipes['everdaisy'].father = 'elderwort';
-		//white mildew = 1 brown mold
-		GardenLoveMachine.recipes['whiteMildew'].valid = function(){return M.plants['brownMold'].unlocked;};
-		GardenLoveMachine.recipes['whiteMildew'].recipeTime = GardenLoveMachine.calculateRecipeTime(['whiteMildew', 'brownMold']);
-		GardenLoveMachine.recipes['whiteMildew'].solo = true;
-		GardenLoveMachine.recipes['whiteMildew'].mother = 'brownMold';
+			'none':{
+				valid: function(){return true;},
+				recipeTime: 0,
+				none: true
+			},
+		//meddleweed: fresh air
+			'meddleweed':{
+				valid: function(){return true;};
+				recipeTime: GardenLoveMachine.calculateRecipeTime(['meddleweed']),
+				meddleweed: true
+			},
+		//brown mold: harvest meddleweed
+			'brownMold':{
+				valid: function(){return M.plants['meddleweed'].unlocked;},
+				recipeTime: GardenLoveMachine.calculateRecipeTime(['brownMold', 'meddleweed']),
+				fill: true,
+				mother: 'meddleweed'
+			},
+		//crumbspore: harvest meddleweed
+			'crumbspore':{
+				valid: function(){return M.plants['meddleweed'].unlocked;},
+				recipeTime: GardenLoveMachine.calculateRecipeTime(['crumbspore', 'meddleweed']),
+				fill: true,
+				mother: 'meddleweed'
+			},
+		//juicy queenbeet: 8 queenbeet
+			'queenbeetLump':{
+				valid: function(){return M.plants['queenbeet'].unlocked;},
+				recipeTime: GardenLoveMachine.calculateRecipeTime(['queenbeetLump', 'queenbeet']),
+				juicy: true,
+				mother: 'queenbeet'
+			},
+		//shriekbulb: 3 duketater (immature)
+			'shriekbulb':{
+				valid: function(){return (M.plants['duketater'].unlocked && M.plants['queenbeetLump'].unlocked);}, //defer until we have a juicy
+				recipeTime: GardenLoveMachine.calculateRecipeTime(['shriekbulb', 'duketater']),
+				shriek: true,
+				mother: 'duketater'
+			},
+		//everdaisy: 3 tidygrass, 3 elderwort
+			'everdaisy':{
+				valid: function(){return (M.plants['duketater'].unlocked && M.plants['queenbeetLump'].unlocked);},
+				recipeTime: GardenLoveMachine.calculateRecipeTime(['everdaisy', 'tidygrass']),
+				boxcars: true,
+				mother: 'tidygrass',
+				father: 'elderwort'
+			},
+		//white mildew: 1 brown mold
+			'whiteMildew':{
+				valid: function(){return M.plants['brownMold'].unlocked;},
+				recipeTime: GardenLoveMachine.calculateRecipeTime(['whiteMildew', 'brownMold']),
+				solo: true,
+				mother: 'brownMold'
+			},
 		
 		
 		//normal stuffs
 		
-		//chocoroot = 1 wheat, 1 brown mold (immature)
-		GardenLoveMachine.recipes['chocoroot'].mother = 'bakerWheat';
-		GardenLoveMachine.recipes['chocoroot'].father = 'brownMold';
-		//white chocoroot = 1 chocoroot, 1x white mildew (immature)
-		GardenLoveMachine.recipes['whiteChocoroot'].mother = 'bakerWheat';
-		GardenLoveMachine.recipes['whiteChocoroot'].father = 'brownMold';
-		//thumbcorn = 2 wheat
-		GardenLoveMachine.recipes['thumbcorn'].valid = function(){return M.plants['bakeberry'].unlocked;} //defer for bakeberry
-		GardenLoveMachine.recipes['thumbcorn'].mother = 'bakerWheat';
-		GardenLoveMachine.recipes['thumbcorn'].father = 'bakerWheat';
-		//bakeberry = 2 wheat
-		GardenLoveMachine.recipes['bakeberry'].mother = 'bakerWheat';
-		GardenLoveMachine.recipes['bakeberry'].father = 'bakerWheat';
-		//cronerice = 1 wheat, 1 thumbcorn
-		GardenLoveMachine.recipes['cronerice'].mother = 'bakerWheat';
-		GardenLoveMachine.recipes['cronerice'].father = 'thumbcorn';
-		//gildmillet = 1 cronerice, 1 thumbcorn
-		GardenLoveMachine.recipes['gildmillet'].mother = 'cronerice';
-		GardenLoveMachine.recipes['gildmillet'].father = 'thumbcorn';
-		//clover = 1 gildmillet, 1 wheat
-		GardenLoveMachine.recipes['clover'].valid = function(){return (M.plants['gildmillet'].unlocked && M.plants['goldenClover'].unlocked);}; //defer for golden clovers
-		GardenLoveMachine.recipes['clover'].mother = 'gildmillet';
-		GardenLoveMachine.recipes['clover'].father = 'bakerWheat';
-		//gold clover = 1 gildmillet, 1 wheat
-		GardenLoveMachine.recipes['goldenClover'].mother = 'gildmillet';
-		GardenLoveMachine.recipes['goldenClover'].father = 'bakerWheat';
-		//shimmerlily = 1 clover, 1 gildmillet
-		GardenLoveMachine.recipes['shimmerlily'].mother = 'clover';
-		GardenLoveMachine.recipes['shimmerlily'].father = 'gildmillet';
-		//elderwort = 1 cronerice, 1 shimmerlily
-		GardenLoveMachine.recipes['elderwort'].mother = 'cronerice';
-		GardenLoveMachine.recipes['elderwort'].father = 'shimmerlily';
-		//whiskerbloom = 1 shimmerlily, 1 white chocoroot
-		GardenLoveMachine.recipes['whiskerbloom'].mother = 'shimmerlily';
-		GardenLoveMachine.recipes['whiskerbloom'].father = 'whiteChocoroot';
-		//chimerose = 1 shimmerlilly, 1 whiskerbloom
-		GardenLoveMachine.recipes['chimerose'].mother = 'whiskerbloom';
-		GardenLoveMachine.recipes['chimerose'].father = 'shimmerlily';
-		//nursetulip = 2 whiskerbloom
-		GardenLoveMachine.recipes['nursetulip'].mother = 'whiskerbloom';
-		GardenLoveMachine.recipes['nursetulip'].father = 'whiskerbloom';
-		//drowsyfern = 1 chocoroot, 1 keenmoss
-		GardenLoveMachine.recipes['drowsyfern'].mother = 'keenmoss';
-		GardenLoveMachine.recipes['drowsyfern'].father = 'chocoroot';
-		//wardlichen = 1 cronerice, 1 white mildew
-		GardenLoveMachine.recipes['wardlichen'].mother = 'cronerice';
-		GardenLoveMachine.recipes['wardlichen'].father = 'whiteMildew';
-		//keenmoss = 1 green rot, 1 brown mold
-		GardenLoveMachine.recipes['keenmoss'].mother = 'greenRot';
-		GardenLoveMachine.recipes['keenmoss'].father = 'brownMold';
-		//queenbeet = 1 bakeberry, 1 chocoroot
-		GardenLoveMachine.recipes['queenbeet'].mother = 'bakeberry';
-		GardenLoveMachine.recipes['queenbeet'].father = 'chocoroot';
-		//duketater = 2 queenbeet
-		GardenLoveMachine.recipes['duketater'].valid = function(){return (M.plants['queenbeetLump'].unlocked);}; //defer for juicy
-		GardenLoveMachine.recipes['duketater'].mother = 'queenbeet';
-		GardenLoveMachine.recipes['duketater'].father = 'queenbeet';
-		//tidygrass = 1 wheat, 1 white chocoroot
-		GardenLoveMachine.recipes['tidygrass'].mother = 'bakerWheat';
-		GardenLoveMachine.recipes['tidygrass'].father = 'whiteChocoroot';
-		//doughshroom = 2 crumbspore
-		GardenLoveMachine.recipes['doughshroom'].mother = 'crumbspore';
-		GardenLoveMachine.recipes['doughshroom'].father = 'crumbspore';
-		//glovemorel = 1 crumbspore, 1 thumbcorn
-		GardenLoveMachine.recipes['glovemorel'].mother = 'crumbspore';
-		GardenLoveMachine.recipes['glovemorel'].father = 'thumbcorn';
-		//cheapcap = 1 crumbspore, 1 shimmerlily
-		GardenLoveMachine.recipes['cheapcap'].mother = 'crumbspore';
-		GardenLoveMachine.recipes['cheapcap'].father = 'shimmerlily';
-		//fools bolete = 1 doughshroom, 1 green rot
-		GardenLoveMachine.recipes['foolBolete'].mother = 'doughshroom';
-		GardenLoveMachine.recipes['foolBolete'].father = 'greenRot';
-		//wrinklegill = 1 crumbspore, 1 brown mold
-		GardenLoveMachine.recipes['wrinklegill'].mother = 'crumbspore';
-		GardenLoveMachine.recipes['wrinklegill'].father = 'brownMold';
-		//green rot = 1 white mildew, 1 ordinary clover
-		GardenLoveMachine.recipes['greenRot'].mother = 'clover';
-		GardenLoveMachine.recipes['greenRot'].father = 'whiteMildew';
-		//ichorpuff = 1 elderwort, 1 crumbspore
-		GardenLoveMachine.recipes['ichorpuff'].mother = 'elderwort';
-		GardenLoveMachine.recipes['ichorpuff'].father = 'crumbspore';
+		//chocoroot: 1 wheat, 1 brown mold (immature)
+			'chocoroot':{
+				mother: 'bakerWheat',
+				father: 'brownMold'
+			},
+		//white chocoroot: 1 chocoroot, 1x white mildew (immature)
+			'whiteChocoroot'].mother: 'bakerWheat',
+			'whiteChocoroot'].father: 'brownMold'
+			},
+		//thumbcorn: 2 wheat
+			'thumbcorn':{
+				valid: function(){return M.plants['bakeberry'].unlocked;}, //defer for bakeberry
+				mother: 'bakerWheat',
+				father: 'bakerWheat'
+			},
+		//bakeberry: 2 wheat
+			'bakeberry':{
+				mother: 'bakerWheat',
+				father: 'bakerWheat'
+			},
+		//cronerice: 1 wheat, 1 thumbcorn
+			'cronerice':{
+				mother: 'bakerWheat',
+				father: 'thumbcorn'
+			},
+		//gildmillet: 1 cronerice, 1 thumbcorn
+			'gildmillet':{
+				mother: 'cronerice',
+				father: 'thumbcorn'
+			},
+		//clover: 1 gildmillet, 1 wheat
+			'clover':{
+				valid: function(){return (M.plants['gildmillet'].unlocked && M.plants['goldenClover'].unlocked);}, //defer for golden clovers
+				mother: 'gildmillet',
+				father: 'bakerWheat'
+			},
+		//gold clover: 1 gildmillet, 1 wheat
+			'goldenClover':{
+				mother: 'gildmillet',
+				father: 'bakerWheat'
+			},
+		//shimmerlily: 1 clover, 1 gildmillet
+			'shimmerlily':{
+				mother: 'clover',
+				father: 'gildmillet'
+			},
+		//elderwort: 1 cronerice, 1 shimmerlily
+			'elderwort':{
+				mother: 'cronerice',
+				father: 'shimmerlily'
+			},
+		//whiskerbloom: 1 shimmerlily, 1 white chocoroot
+			'whiskerbloom':{
+				mother: 'shimmerlily',
+				father: 'whiteChocoroot'
+			},
+		//chimerose: 1 shimmerlilly, 1 whiskerbloom
+			'chimerose':{
+				mother: 'whiskerbloom',
+				father: 'shimmerlily'
+			},
+		//nursetulip: 2 whiskerbloom
+			'nursetulip':{
+				mother: 'whiskerbloom',
+				father: 'whiskerbloom'
+			},
+		//drowsyfern: 1 chocoroot, 1 keenmoss
+			'drowsyfern':{
+				mother: 'keenmoss',
+				father: 'chocoroot'
+			},
+		//wardlichen: 1 cronerice, 1 white mildew
+			'wardlichen':{
+				mother: 'cronerice',
+				father: 'whiteMildew'
+			},
+		//keenmoss: 1 green rot, 1 brown mold
+			'keenmoss':{
+				mother: 'greenRot',
+				father: 'brownMold'
+			},
+		//queenbeet: 1 bakeberry, 1 chocoroot
+			'queenbeet':{
+				mother: 'bakeberry',
+				father: 'chocoroot'
+			},
+		//duketater: 2 queenbeet
+			'duketater':{
+				valid: function(){return (M.plants['queenbeetLump'].unlocked);}, //defer for juicy
+				mother: 'queenbeet',
+				father: 'queenbeet'
+			},
+		//tidygrass: 1 wheat, 1 white chocoroot
+			'tidygrass':{
+				mother: 'bakerWheat',
+				father: 'whiteChocoroot'
+			},
+		//doughshroom: 2 crumbspore
+			'doughshroom':{
+				mother: 'crumbspore',
+				father: 'crumbspore'
+			},
+		//glovemorel: 1 crumbspore, 1 thumbcorn
+			'glovemorel':{
+				mother: 'crumbspore',
+				father: 'thumbcorn'
+			},
+		//cheapcap: 1 crumbspore, 1 shimmerlily
+			'cheapcap':{
+				mother: 'crumbspore',
+				father: 'shimmerlily'
+			},
+		//fools bolete: 1 doughshroom, 1 green rot
+			'foolBolete':{
+				mother: 'doughshroom',
+				father: 'greenRot'
+			},
+		//wrinklegill: 1 crumbspore, 1 brown mold
+			'wrinklegill':{
+				mother: 'crumbspore',
+				father: 'brownMold'
+			},
+		//green rot: 1 white mildew, 1 ordinary clover
+			'greenRot':{
+				mother: 'clover',
+				father: 'whiteMildew'
+			},
+		//ichorpuff: 1 elderwort, 1 crumbspore
+			'ichorpuff':{
+				mother: 'elderwort',
+				father: 'crumbspore'
+			}
+		}
 		
 		for (var i in GardenLoveMachine.recipes)
 		{
-			if (typeof GardenLoveMachine.recipes[i].valid ==='undefined'){
+			if (typeof i].valid ==='undefined'){
 				GardenLoveMachine.recipes[i].valid = function(){return (M.plants[i.mother].unlocked && M.plants[i.father].unlocked);};
 			}
-			if (typeof GardenLoveMachine.recipes[i].recipeTime ==='undefined'){
+			if (typeof i].recipeTime ==='undefined'){
 				GardenLoveMachine.recipes[i].recipeTime = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
 			}
-			if (typeof GardenLoveMachine.recipes[i].none ==='undefined'){
+			if (typeof i].none ==='undefined'){
 				GardenLoveMachine.recipes[i].none = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
 			}
-			if (typeof GardenLoveMachine.recipes[i].meddleweed ==='undefined'){
+			if (typeof i].meddleweed ==='undefined'){
 				GardenLoveMachine.recipes[i].meddleweed = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
 			}
-			if (typeof GardenLoveMachine.recipes[i].fill ==='undefined'){
+			if (typeof i].fill ==='undefined'){
 				GardenLoveMachine.recipes[i].fill = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
 			}
-			if (typeof GardenLoveMachine.recipes[i].juicy ==='undefined'){
+			if (typeof i].juicy ==='undefined'){
 				GardenLoveMachine.recipes[i].juicy = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
 			}
-			if (typeof GardenLoveMachine.recipes[i].shriek ==='undefined'){
+			if (typeof i].shriek ==='undefined'){
 				GardenLoveMachine.recipes[i].shriek = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
 			}
-			if (typeof GardenLoveMachine.recipes[i].boxcars ==='undefined'){
+			if (typeof i].boxcars ==='undefined'){
 				GardenLoveMachine.recipes[i].boxcars = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
 			}
-			if (typeof GardenLoveMachine.recipes[i].solo ==='undefined'){
+			if (typeof i].solo ==='undefined'){
 				GardenLoveMachine.recipes[i].solo = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
 			}
 			GardenLoveMachine.recipes[i].key = i;
@@ -394,8 +460,8 @@ GardenLoveMachine.launch = function(){
 		for (var i in GardenLoveMachine.recipes)
 		{
 			var M = GardenLoveMachine.M;
-			if(GardenLoveMachine.recipes[i].valid && !M.plants[i].unlocked){
-				if(GardenLoveMachine.recipes[i].none) return i;
+			if(i].valid && !M.plants[i].unlocked){
+				if(i].none) return i;
 				var plantCheck = GardenLoveMachine.forEachTile(function(x,y){
 					var M = GardenLoveMachine.M;
 					var tile = M.getTile(x,y);
