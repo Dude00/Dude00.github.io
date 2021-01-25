@@ -258,31 +258,31 @@ GardenLoveMachine.launch = function(){
 		
 		for (var i in GardenLoveMachine.recipes)
 		{
-			if (typeof i].valid ==='undefined'){
+			if (typeof GardenLoveMachine.recipes[i].valid ==='undefined'){
 				GardenLoveMachine.recipes[i].valid = function(){return (M.plants[i.mother].unlocked && M.plants[i.father].unlocked);};
 			}
-			if (typeof i].recipeTime ==='undefined'){
+			if (typeof GardenLoveMachine.recipes[i].recipeTime ==='undefined'){
 				GardenLoveMachine.recipes[i].recipeTime = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
 			}
-			if (typeof i].none ==='undefined'){
+			if (typeof GardenLoveMachine.recipes[i].none ==='undefined'){
 				GardenLoveMachine.recipes[i].none = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
 			}
-			if (typeof i].meddleweed ==='undefined'){
+			if (typeof GardenLoveMachine.recipes[i].meddleweed ==='undefined'){
 				GardenLoveMachine.recipes[i].meddleweed = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
 			}
-			if (typeof i].fill ==='undefined'){
+			if (typeof GardenLoveMachine.recipes[i].fill ==='undefined'){
 				GardenLoveMachine.recipes[i].fill = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
 			}
-			if (typeof i].juicy ==='undefined'){
+			if (typeof GardenLoveMachine.recipes[i].juicy ==='undefined'){
 				GardenLoveMachine.recipes[i].juicy = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
 			}
-			if (typeof i].shriek ==='undefined'){
+			if (typeof GardenLoveMachine.recipes[i].shriek ==='undefined'){
 				GardenLoveMachine.recipes[i].shriek = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
 			}
-			if (typeof i].boxcars ==='undefined'){
+			if (typeof GardenLoveMachine.recipes[i].boxcars ==='undefined'){
 				GardenLoveMachine.recipes[i].boxcars = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
 			}
-			if (typeof i].solo ==='undefined'){
+			if (typeof GardenLoveMachine.recipes[i].solo ==='undefined'){
 				GardenLoveMachine.recipes[i].solo = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
 			}
 			GardenLoveMachine.recipes[i].key = i;
