@@ -300,7 +300,7 @@ GardenLoveMachine.launch = function(){
 	GardenLoveMachine.forEachPlot = function(callback,offsetX,offsetY) {
 		var result = false;
 		for (var x = offsetX; x<offsetX+3; x++) {
-			for (var y = offsetY,; y<offsetY+3; y++) {
+			for (var y = offsetY; y<offsetY+3; y++) {
 				if (GardenLoveMachine.M.isTileUnlocked(x, y)) {
 					result = result || callback(x, y);
 				}
@@ -312,7 +312,7 @@ GardenLoveMachine.launch = function(){
 	GardenLoveMachine.forEachPlotAnd = function(callback,offsetX,offsetY) {
 		var result = false;
 		for (var x = offsetX; x<offsetX+3; x++) {
-			for (var y = offsetY,; y<offsetY+3; y++) {
+			for (var y = offsetY; y<offsetY+3; y++) {
 				if (GardenLoveMachine.M.isTileUnlocked(x, y)) {
 					result = result && callback(x, y);
 				}
