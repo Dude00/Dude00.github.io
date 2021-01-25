@@ -25,7 +25,7 @@ GardenLoveMachine.launch = function(){
 			CCSE.AppendCollapsibleOptionsMenu(GardenLoveMachinename, GardenLoveMachinegetMenuString());
 		});
 
-		GardenLoveMachine.recipes = [];
+		GardenLoveMachine.recipes = {};
 		
 		CCSE.MinigameReplacer(function(){
 			var objKey = 'Farm';
