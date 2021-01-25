@@ -266,8 +266,8 @@ GardenLoveMachine.launch = function(){
 			autoSacrifice: false,
 			autoSalvage: false,
 			
-			plotState: [0, 0, 0, 0]
-			plotRecipe: ['none', 'none', 'none', 'none']
+			plotState: [0, 0, 0, 0],
+			plotRecipe: ['none', 'none', 'none', 'none'],
 			planterPlot: []
 		}
 	}
