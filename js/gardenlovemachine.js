@@ -70,7 +70,7 @@ GardenLoveMachine.launch = function(){
 			},
 		//meddleweed: fresh air
 			'meddleweed':{
-				valid: function(){return true;};
+				valid: function(){return true;},
 				recipeTime: GardenLoveMachine.calculateRecipeTime(['meddleweed']),
 				meddleweed: true
 			},
