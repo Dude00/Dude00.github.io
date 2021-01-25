@@ -405,7 +405,7 @@ GardenLoveMachine.launch = function(){
 		var M = GardenLoveMachine.M;
 		
 		GardenLoveMachine.data.plotRecipe[i] = GardenLoveMachine.recipeGet();
-		GardenLoveMachine.forEachPlot((function(x,y){GardenLoveMachine.data.planterPlot[x][y] = -1;}, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
+		GardenLoveMachine.forEachPlot(function(x,y){GardenLoveMachine.data.planterPlot[x][y] = -1;}, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
 		if (GardenLoveMachine.data.plotRecipe[i].none) return;
 		if (GardenLoveMachine.data.plotRecipe[i].fill) {
 			GardenLoveMachine.forEachPlot((function(x,y){GardenLoveMachine.data.planterPlot[x][y] = M.plants[GardenLoveMachine.data.plotRecipe[i].mother].id;}, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
