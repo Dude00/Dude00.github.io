@@ -474,20 +474,22 @@ GardenLoveMachine.launch = function(){
 		{
 			var plant = GardenLoveMachine.recipesSorted[i][0];
 			var M = GardenLoveMachine.M;
-			if(GardenLoveMachine.recipes[plant].valid() && !M.plants[plant].unlocked){
-				var plantCheck = GardenLoveMachine.forEachTile(function(x,y){
-					var M = GardenLoveMachine.M;
-					var tile = M.getTile(x,y);
-					return ((tile[0]-1) == M.plants[plant].id);
-				});
-				if (!plantCheck) {
-					var plotCheck = true;
-					for (var i = 0; i < 4; i++){
-						if (GardenLoveMachine.data.plotRecipe[i] == seed){
-							plotCheck = false;
+			if(!GardenLoveMachine.recipes[plant].none){
+				if(GardenLoveMachine.recipes[plant].valid() && !M.plants[plant].unlocked){
+					var plantCheck = GardenLoveMachine.forEachTile(function(x,y){
+						var M = GardenLoveMachine.M;
+						var tile = M.getTile(x,y);
+						return ((tile[0]-1) == M.plants[plant].id);
+					});
+					if (!plantCheck) {
+						var plotCheck = true;
+						for (var i = 0; i < 4; i++){
+							if (GardenLoveMachine.data.plotRecipe[i] == seed){
+								plotCheck = false;
+							}
 						}
+						if (plotCheck) return plant;
 					}
-					if (plotCheck) return plant;
 				}
 			}
 		}
@@ -495,8 +497,8 @@ GardenLoveMachine.launch = function(){
 		{
 			var plant = GardenLoveMachine.recipesSorted[i][0];
 			var M = GardenLoveMachine.M;
+			if(GardenLoveMachine.recipes[plant].none) return plant;
 			if(GardenLoveMachine.recipes[plant].valid() && !M.plants[plant].unlocked){
-				if(GardenLoveMachine.recipes[plant].none) return plant;
 				var plantCheck = GardenLoveMachine.forEachTile(function(x,y){
 					var M = GardenLoveMachine.M;
 					var tile = M.getTile(x,y);
