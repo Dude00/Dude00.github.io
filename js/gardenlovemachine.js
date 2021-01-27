@@ -15,12 +15,12 @@ GardenLoveMachine.launch = function(){
 		GardenLoveMachine.plotOffY = [0, 0, 3, 3];
 		
 		GardenLoveMachine.data = GardenLoveMachine.defaultData();
-		if(CCSE.config.OtherMods.GardenLoveMachine) GardenLoveMachine.data = CCSE.save.OtherMods.GardenLoveMachine;
+		if(CCSE.config.OtherMods.GardenLoveMachine) GardenLoveMachine.data = CCSE.config.OtherMods.GardenLoveMachine;
 		CCSE.customSave.push(function(){
 			CCSE.config.OtherMods.GardenLoveMachine = GardenLoveMachine.data;
 		});
 		CCSE.customLoad.push(function(){
-			if(CCSE.config.OtherMods.GardenLoveMachine) GardenLoveMachine.data = CCSE.save.OtherMods.GardenLoveMachine;
+			if(CCSE.config.OtherMods.GardenLoveMachine) GardenLoveMachine.data = CCSE.config.OtherMods.GardenLoveMachine;
 		});
 		Game.customOptionsMenu.push(function(){
 			CCSE.AppendCollapsibleOptionsMenu(GardenLoveMachine.name, GardenLoveMachine.getMenuString());
