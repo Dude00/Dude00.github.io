@@ -588,6 +588,7 @@ GardenLoveMachine.launch = function(){
 			if(!GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].none){
 				if(M.plants[GardenLoveMachine.data.plotRecipe[i]].unlocked){
 					GardenLoveMachine.data.plotState[i] = 0;
+					return;
 				}
 			}
 			switch (GardenLoveMachine.data.plotState[i]) {
