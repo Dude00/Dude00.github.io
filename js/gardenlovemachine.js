@@ -264,7 +264,7 @@ GardenLoveMachine.launch = function(){
 		for (var i in GardenLoveMachine.recipes)
 		{
 			if (typeof GardenLoveMachine.recipes[i].valid ==='undefined'){
-				GardenLoveMachine.recipes[i].valid = Function("return (GardenLoveMachine.M.plants["+GardenLoveMachine.recipes[i].mother+"].unlocked && GardenLoveMachine.M.plants["+ GardenLoveMachine.recipes[i].father+"].unlocked);");
+				GardenLoveMachine.recipes[i].valid = Function("return (GardenLoveMachine.M.plants[\'"+GardenLoveMachine.recipes[i].mother+"\'].unlocked && GardenLoveMachine.M.plants[\'"+ GardenLoveMachine.recipes[i].father+"\'].unlocked);");
 			}
 			if (typeof GardenLoveMachine.recipes[i].recipeTime ==='undefined'){
 				GardenLoveMachine.recipes[i].recipeTime = GardenLoveMachine.calculateRecipeTime([i, GardenLoveMachine.recipes[i].mother, GardenLoveMachine.recipes[i].father]);
