@@ -47,9 +47,9 @@ GardenLoveMachine.launch = function(){
 		//dumb and hacky
 		for (var i in plantArray)
 		{
-			if (!M.plants[i]) console.log('No plant named '+i);
+			if (!M.plants[plantArray[i]]) console.log('No plant named '+plantArray[i]);
 			else {
-				var it=M.plants[i]
+				var it=M.plants[plantArray[i]];
 				if (skip){
 					time += it.mature/(it.ageTick+(it.ageTickR/2));
 					skip = false;
