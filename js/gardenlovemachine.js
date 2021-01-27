@@ -14,6 +14,8 @@ GardenLoveMachine.launch = function(){
 		GardenLoveMachine.plotOffX = [0, 3, 0, 3];
 		GardenLoveMachine.plotOffY = [0, 0, 3, 3];
 		
+		GardenLoveMachine.onClickPlant = ['bakeberry','chocoroot','whiteChocoroot','queenbeet','duketater'];
+		
 		GardenLoveMachine.recipesBaked = false;
 		GardenLoveMachine.data = GardenLoveMachine.defaultData();
 		if(CCSE.config.OtherMods.GardenLoveMachine) GardenLoveMachine.data = CCSE.config.OtherMods.GardenLoveMachine;
@@ -429,10 +431,6 @@ GardenLoveMachine.launch = function(){
 		}
 	}
 	
-	GardenLoveMachine.isOnClickPlant = function(seed){
-		return in_array(seed,['bakeberry','chocoroot','whiteChocoroot','queenbeet','duketater']);
-	}
-	
 	//harvester
 	//delete anything weird in the plots, unless it's a new seed
 	//special rules for meddleweed:
@@ -454,7 +452,7 @@ GardenLoveMachine.launch = function(){
 					if (plant.id != GardenLoveMachine.data.planterPlot[x][y]) {
 						M.clickTile(x,y);
 					}
-					if(GardenLoveMachine.data.autoSalvage && (tile[1] + plant.ageTick + plant.ageTickR >= 100) && GardenLoveMachine.isOnClickPlant(plant.key)){
+					if(GardenLoveMachine.data.autoSalvage && (tile[1] + plant.ageTick + plant.ageTickR >= 100) && GardenLoveMachine.onClickPlant.includes(plant.key)){
 						M.clickTile(x,y)
 					}
 				}
