@@ -517,6 +517,9 @@ GardenLoveMachine.launch = function(){
 			var plant = M.plantsById[tile[0] - 1];
 			if(tile[1] + plant.ageTick + plant.ageTickR >= plant.mature){return true;} else return false;
 		}
+		else {
+			if (GardenLoveMachine.data.planterPlot[x][y] > -1) return false;
+		}
 		return true;
 	}
 	
