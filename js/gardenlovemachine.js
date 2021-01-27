@@ -602,6 +602,7 @@ GardenLoveMachine.launch = function(){
 					break;
 				case 4:
 					GardenLoveMachine.forEachPlot(function(x,y){GardenLoveMachine.data.planterPlot[x][y] = -1;}, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
+					GardenLoveMachine.data.plotState[i] = 0;
 					break;
 				default:
 					break;
