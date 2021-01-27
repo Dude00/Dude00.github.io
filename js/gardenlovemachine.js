@@ -47,9 +47,9 @@ GardenLoveMachine.launch = function(){
 		//dumb and hacky
 		for (var i in plantArray)
 		{
-			if (!M.plants[plantArray[i]]) console.log('No plant named '+plantArray[i]);
+			if (!M.plants[i]) console.log('No plant named '+i);
 			else {
-				var it=M.plants[plantArray[i]]
+				var it=M.plants[i]
 				if (skip){
 					time += it.mature/(it.ageTick+(it.ageTickR/2));
 					skip = false;
@@ -270,30 +270,34 @@ GardenLoveMachine.launch = function(){
 				GardenLoveMachine.recipes[i].recipeTime = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
 			}
 			if (typeof GardenLoveMachine.recipes[i].none ==='undefined'){
-				GardenLoveMachine.recipes[i].none = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
+				GardenLoveMachine.recipes[i].none = false;
 			}
 			if (typeof GardenLoveMachine.recipes[i].meddleweed ==='undefined'){
-				GardenLoveMachine.recipes[i].meddleweed = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
+				GardenLoveMachine.recipes[i].meddleweed = false;
 			}
 			if (typeof GardenLoveMachine.recipes[i].fill ==='undefined'){
-				GardenLoveMachine.recipes[i].fill = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
+				GardenLoveMachine.recipes[i].fill = false;
 			}
 			if (typeof GardenLoveMachine.recipes[i].juicy ==='undefined'){
-				GardenLoveMachine.recipes[i].juicy = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
+				GardenLoveMachine.recipes[i].juicy = false;
 			}
 			if (typeof GardenLoveMachine.recipes[i].shriek ==='undefined'){
-				GardenLoveMachine.recipes[i].shriek = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
+				GardenLoveMachine.recipes[i].shriek = false;
 			}
 			if (typeof GardenLoveMachine.recipes[i].boxcars ==='undefined'){
-				GardenLoveMachine.recipes[i].boxcars = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
+				GardenLoveMachine.recipes[i].boxcars = false;
 			}
 			if (typeof GardenLoveMachine.recipes[i].solo ==='undefined'){
-				GardenLoveMachine.recipes[i].solo = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
+				GardenLoveMachine.recipes[i].solo = false;
 			}
 			GardenLoveMachine.recipes[i].key = i;
 		}
+		GardenLoveMachine.recipesSorted = []
+		for (var i in GardenLoveMachine.recipes){
+			GardenLoveMachine.recipesSorted.push([i, GardenLoveMachine.recipes[i].recipeTime]);
+		}
 		
-		GardenLoveMachine.recipes.sort(function(a,b){return b.recipeTime - a.recipeTime});
+		GardenLoveMachine.recipesSorted.sort(function(a,b){return b[1] - a[1]});
 	}
 	
 	GardenLoveMachine.getMenuString = function(){
@@ -463,17 +467,18 @@ GardenLoveMachine.launch = function(){
 	}
 	
 	GardenLoveMachine.recipeGet = function(){
-		for (var i in GardenLoveMachine.recipes)
+		for (var i in GardenLoveMachine.recipesSorted)
 		{
+			var plant = GardenLoveMachine.recipesSorted[i][0];
 			var M = GardenLoveMachine.M;
-			if(GardenLoveMachine.recipes[i].valid && !M.plants[i].unlocked){
-				if(GardenLoveMachine.recipes[i].none) return i;
+			if(GardenLoveMachine.recipes[plant].valid && !M.plants[plant].unlocked){
+				if(GardenLoveMachine.recipes[plant].none) return plant;
 				var plantCheck = GardenLoveMachine.forEachTile(function(x,y){
 					var M = GardenLoveMachine.M;
 					var tile = M.getTile(x,y);
-					return (tile[0]-1) == M.plants[i].id;
+					return (tile[0]-1) == M.plants[plant].id;
 				});
-				if (!plantCheck) return i;
+				if (!plantCheck) return plant;
 			}
 		}
 		return 'none';
