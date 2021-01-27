@@ -406,7 +406,7 @@ GardenLoveMachine.launch = function(){
 	}
 	
 	GardenLoveMachine.forEachPlotAnd = function(callback,offsetX,offsetY) {
-		var result = false;
+		var result = true;
 		for (var x = offsetX; x<offsetX+3; x++) {
 			for (var y = offsetY; y<offsetY+3; y++) {
 				if (GardenLoveMachine.M.isTileUnlocked(x, y)) {
@@ -477,7 +477,7 @@ GardenLoveMachine.launch = function(){
 				var plantCheck = GardenLoveMachine.forEachTile(function(x,y){
 					var M = GardenLoveMachine.M;
 					var tile = M.getTile(x,y);
-					return (tile[0]-1) == M.plants[plant].id;
+					return ((tile[0]-1) == M.plants[plant].id);
 				});
 				if (!plantCheck) return plant;
 			}
@@ -490,7 +490,7 @@ GardenLoveMachine.launch = function(){
 		var tile = M.getTile(x,y);
 		if(tile[0] != 0){
 			var plant = M.plantsById[tile[0] - 1];
-			if(tile[1] + plant.ageTick + plant.ageTickR >= plant.mature){return true} else return false;
+			if(tile[1] + plant.ageTick + plant.ageTickR >= plant.mature){return true;} else return false;
 		}
 		return true;
 	}
@@ -542,7 +542,7 @@ GardenLoveMachine.launch = function(){
 	//3 = one tick from breeding/breed viable, indicator we want that breed soil
 	GardenLoveMachine.plotGrowCheck = function(i) {
 		var breedViable = false;
-		if (GardenLoveMachine.data.plotRecipe[i].none) {
+		if (GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].none) {
 			GardenLoveMachine.data.plotState[i] = 0;
 			return;
 		}
@@ -558,6 +558,12 @@ GardenLoveMachine.launch = function(){
 	//4 = nursing, do nothing until plant is fully grown 
 	
 	GardenLoveMachine.plotThink = function(){
+		var M = GardenLoveMachine.M;
+		if(!GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].none){
+			if(M.plants[GardenLoveMachine.data.plotRecipe[i]].unlocked){
+				GardenLoveMachine.data.plotState[i] = 0;
+			}
+		}
 		for (var i = 0; i < 4; i++){
 			switch (GardenLoveMachine.data.plotState[i]) {
 				case 0:
@@ -570,7 +576,6 @@ GardenLoveMachine.launch = function(){
 					GardenLoveMachine.plotGrowCheck(i);
 					break;
 				case 4:
-					GardenLoveMachine.data.plotState[i] = 0;
 					break;
 				default:
 					break;
