@@ -15,6 +15,7 @@ GardenLoveMachine.launch = function(){
 		GardenLoveMachine.plotOffY = [0, 0, 3, 3];
 		
 		GardenLoveMachine.data = GardenLoveMachine.defaultData();
+		if(CCSE.config.OtherMods.GardenLoveMachine) GardenLoveMachine.data = CCSE.save.OtherMods.GardenLoveMachine;
 		CCSE.customSave.push(function(){
 			CCSE.config.OtherMods.GardenLoveMachine = GardenLoveMachine.data;
 		});
