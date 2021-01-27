@@ -448,7 +448,7 @@ GardenLoveMachine.launch = function(){
 					}
 				}
 				else {
-					if (plant.id != planterPlot[x][y]) {
+					if (plant.id != GardenLoveMachine.data.planterPlot[x][y]) {
 						M.clickTile(x,y);
 					}
 					if(autoSalvage && (tile[1] + plant.ageTick + plant.ageTickR >= 100) && GardenLoveMachine.isOnClickPlant(plant.key)){
