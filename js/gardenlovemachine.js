@@ -484,7 +484,7 @@ GardenLoveMachine.launch = function(){
 					if (!plantCheck) {
 						var plotCheck = true;
 						for (var i = 0; i < 4; i++){
-							if (GardenLoveMachine.data.plotRecipe[i] == seed){
+							if (GardenLoveMachine.data.plotRecipe[i] == plant){
 								plotCheck = false;
 							}
 						}
