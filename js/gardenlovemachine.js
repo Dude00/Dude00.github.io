@@ -623,7 +623,7 @@ GardenLoveMachine.launch = function(){
 	GardenLoveMachine.fertilizer = function(){
 		var targetSoil = 1;
 		for (var i = 0; i < 4; i++) {
-			if (GardenLoveMachine.data.plotState[i] == 5) targetSoil = 4;
+			if (GardenLoveMachine.data.plotState[i] == 3) targetSoil = 4;
 		}
 		GardenLoveMachine.changeSoil(targetSoil);
 	}
