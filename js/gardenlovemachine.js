@@ -581,8 +581,8 @@ GardenLoveMachine.launch = function(){
 	GardenLoveMachine.planter = function(x,y){
 		var M = GardenLoveMachine.M;
 		var tile = M.getTile(x,y);
-		if (planterPlot[x][y] > -1 && tile[0] == 0) {
-			M.useTool(planterPlot[x][y],x,y);
+		if (GardenLoveMachine.data.planterPlot[x][y] > -1 && tile[0] == 0) {
+			M.useTool(GardenLoveMachine.data.planterPlot[x][y],x,y);
 			M.toCompute=true;
 		}	
 	}
