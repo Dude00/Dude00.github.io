@@ -47,11 +47,16 @@ GardenLoveMachine.launch = function(){
 		//dumb and hacky
 		for (var i in plantArray)
 		{
-			if (skip){
-				time += M.plants[plantArray[i]].mature/(M.plants[plantArray[i]].ageTick+(M.plants[plantArray[i]].ageTickR/2));
-			}
-			else{
-				growTime = Math.max(growTime, M.plants[plantArray[i]].mature/(M.plants[plantArray[i]].ageTick+(M.plants[plantArray[i]].ageTickR/2)));
+			if (!M.plants[plantArray[i]]) console.log('No plant named '+plantArray[i]);
+			else {
+				var it=M.plants[plantArray[i]]
+				if (skip){
+					time += it.mature/(it.ageTick+(it.ageTickR/2));
+					skip = false;
+				}
+				else{
+					growTime = Math.max(growTime, it.mature/(it.ageTick+(it.ageTickR/2)));
+				}
 			}
 		}
 		return time+growTime;
