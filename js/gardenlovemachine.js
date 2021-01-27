@@ -608,7 +608,7 @@ GardenLoveMachine.launch = function(){
 	
 	GardenLoveMachine.newCheck = function(){
 		for (var i = 0; i < 4; i++) {
-			var foundPlant = foundPlant = GardenLoveMachine.forEachPlot(newCheck, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
+			var foundPlant = GardenLoveMachine.forEachPlot(GardenLoveMachine.findNewPlant, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
 			if (foundPlant) {
 				GardenLoveMachine.data.plotState[i] = 4;
 			}
