@@ -526,10 +526,11 @@ GardenLoveMachine.launch = function(){
 	
 	//plot states:
 	//0 = empty, find new seed
-	GardenLoveMachine.plotStart = function(i){
+	GardenLoveMachine.plotStart = function(i,needRecipe){
 		var M = GardenLoveMachine.M;
 		
-		GardenLoveMachine.data.plotRecipe[i] = GardenLoveMachine.recipeGet();
+		if (needRecipe) GardenLoveMachine.data.plotRecipe[i] = GardenLoveMachine.recipeGet();
+		
 		GardenLoveMachine.forEachPlot(function(x,y){GardenLoveMachine.data.planterPlot[x][y] = -1;}, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
 		if (GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].none) return;
 		if (GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].fill) {
@@ -565,7 +566,7 @@ GardenLoveMachine.launch = function(){
 		
 		GardenLoveMachine.data.plotState[i] = 2;
 	}
-	//1 = planting, to attempt to make sure shit grows at the same time (dummied out until i care)
+	//1 = planting, to attempt to make sure shit grows at the same time (currently does not do that)
 	//2 = growing, mostly idle until prereqs for 3 are hit
 	//3 = one tick from breeding/breed viable, indicator we want that breed soil
 	GardenLoveMachine.plotGrowCheck = function(i) {
@@ -595,9 +596,10 @@ GardenLoveMachine.launch = function(){
 			}
 			switch (GardenLoveMachine.data.plotState[i]) {
 				case 0:
-					GardenLoveMachine.plotStart(i);
+					GardenLoveMachine.plotStart(i, true);
 					break;
 				case 1:
+					GardenLoveMachine.plotStart(i, false);
 					break;
 				case 2:
 				case 3:
@@ -605,7 +607,7 @@ GardenLoveMachine.launch = function(){
 					break;
 				case 4:
 					GardenLoveMachine.forEachPlot(function(x,y){GardenLoveMachine.data.planterPlot[x][y] = -1;}, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
-					GardenLoveMachine.data.plotState[i] = 0;
+					GardenLoveMachine.data.plotState[i] = 1;
 					break;
 				default:
 					break;
