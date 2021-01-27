@@ -618,14 +618,14 @@ GardenLoveMachine.launch = function(){
 	
 	GardenLoveMachine.check = function(){
 		var M = GardenLoveMachine.M;
-		if(autoBreed){
+		if(GardenLoveMachine.data.autoBreed){
 			GardenLoveMachine.forEachTile(GardenLoveMachine.harvest);
 			GardenLoveMachine.newCheck();
 			GardenLoveMachine.plotThink();
 			GardenLoveMachine.forEachTile(GardenLoveMachine.planter);
 			GardenLoveMachine.fertilizer();
 		}
-		if(autoSacrifice){
+		if(GardenLoveMachine.data.autoSacrifice){
 			M.convert(); //automatically returns if you can't, so
 		}
 	}
