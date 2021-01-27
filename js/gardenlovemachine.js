@@ -620,9 +620,9 @@ GardenLoveMachine.launch = function(){
 		var M = GardenLoveMachine.M;
 		if(GardenLoveMachine.data.autoBreed){
 			GardenLoveMachine.forEachTile(GardenLoveMachine.harvest);
-			//GardenLoveMachine.newCheck();
+			GardenLoveMachine.newCheck();
 			GardenLoveMachine.plotThink();
-			//GardenLoveMachine.forEachTile(GardenLoveMachine.planter);
+			GardenLoveMachine.forEachTile(GardenLoveMachine.planter);
 			GardenLoveMachine.fertilizer();
 		}
 		if(GardenLoveMachine.data.autoSacrifice){
