@@ -48,10 +48,10 @@ GardenLoveMachine.launch = function(){
 		for (var i in plantArray)
 		{
 			if (skip){
-				time += M.plants[i].mature/(M.plants[i].ageTick+(M.plants[i].ageTickR/2));
+				time += M.plants[plantArray[i]].mature/(M.plants[plantArray[i]].ageTick+(M.plants[plantArray[i]].ageTickR/2));
 			}
 			else{
-				growTime = Math.max(growTime, M.plants[i].mature/(M.plants[i].ageTick+(M.plants[i].ageTickR/2)));
+				growTime = Math.max(growTime, M.plants[plantArray[i]].mature/(M.plants[plantArray[i]].ageTick+(M.plants[plantArray[i]].ageTickR/2)));
 			}
 		}
 		return time+growTime;
