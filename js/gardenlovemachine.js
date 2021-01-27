@@ -14,6 +14,7 @@ GardenLoveMachine.launch = function(){
 		GardenLoveMachine.plotOffX = [0, 3, 0, 3];
 		GardenLoveMachine.plotOffY = [0, 0, 3, 3];
 		
+		GardenLoveMachine.recipesBaked = false;
 		GardenLoveMachine.data = GardenLoveMachine.defaultData();
 		if(CCSE.config.OtherMods.GardenLoveMachine) GardenLoveMachine.data = CCSE.config.OtherMods.GardenLoveMachine;
 		CCSE.customSave.push(function(){
@@ -299,6 +300,7 @@ GardenLoveMachine.launch = function(){
 		}
 		
 		GardenLoveMachine.recipesSorted.sort(function(a,b){return b[1] - a[1]});
+		GardenLoveMachine.recipesBaked = true;
 	}
 	
 	GardenLoveMachine.getMenuString = function(){
@@ -624,15 +626,17 @@ GardenLoveMachine.launch = function(){
 	
 	GardenLoveMachine.check = function(){
 		var M = GardenLoveMachine.M;
-		if(GardenLoveMachine.data.autoBreed){
-			GardenLoveMachine.forEachTile(GardenLoveMachine.harvest);
-			GardenLoveMachine.newCheck();
-			GardenLoveMachine.plotThink();
-			GardenLoveMachine.forEachTile(GardenLoveMachine.planter);
-			GardenLoveMachine.fertilizer();
-		}
-		if(GardenLoveMachine.data.autoSacrifice){
-			M.convert(); //automatically returns if you can't, so
+		if (GardenLoveMachine.recipesBaked){
+			if(GardenLoveMachine.data.autoBreed){
+				GardenLoveMachine.forEachTile(GardenLoveMachine.harvest);
+				GardenLoveMachine.newCheck();
+				GardenLoveMachine.plotThink();
+				GardenLoveMachine.forEachTile(GardenLoveMachine.planter);
+				GardenLoveMachine.fertilizer();
+			}
+			if(GardenLoveMachine.data.autoSacrifice){
+				M.convert(); //automatically returns if you can't, so
+			}
 		}
 	}
 
