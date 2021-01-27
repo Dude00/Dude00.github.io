@@ -420,7 +420,7 @@ GardenLoveMachine.launch = function(){
 	//yell at plots that we found a new seed so do something else
 	GardenLoveMachine.newSeedAlert = function(seed){
 		for (var i = 0; i < 4; i++){
-			if (GardenLoveMachine.data.plotRecipe[i].key == seed){
+			if (GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i].key == seed){
 				GardenLoveMachine.data.plotState[i] = 0;
 			}
 		}
@@ -500,37 +500,37 @@ GardenLoveMachine.launch = function(){
 	GardenLoveMachine.plotStart = function(i){
 		var M = GardenLoveMachine.M;
 		
-		GardenLoveMachine.data.plotRecipe[i] = GardenLoveMachine.recipeGet();
+		GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i] = GardenLoveMachine.recipeGet();
 		GardenLoveMachine.forEachPlot(function(x,y){GardenLoveMachine.data.planterPlot[x][y] = -1;}, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
-		if (GardenLoveMachine.data.plotRecipe[i].none) return;
-		if (GardenLoveMachine.data.plotRecipe[i].fill) {
-			GardenLoveMachine.forEachPlot(function(x,y){GardenLoveMachine.data.planterPlot[x][y] = M.plants[GardenLoveMachine.data.plotRecipe[i].mother].id;}, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
+		if (GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i].none) return;
+		if (GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i].fill) {
+			GardenLoveMachine.forEachPlot(function(x,y){GardenLoveMachine.data.planterPlot[x][y] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].mother].id;}, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
 		}
-		else if (GardenLoveMachine.data.plotRecipe[i].juicy) {
-			GardenLoveMachine.forEachPlot(function(x,y){GardenLoveMachine.data.planterPlot[x][y] = M.plants[GardenLoveMachine.data.plotRecipe[i].mother].id;}, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
+		else if (GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i].juicy) {
+			GardenLoveMachine.forEachPlot(function(x,y){GardenLoveMachine.data.planterPlot[x][y] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].mother].id;}, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
 			GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][1+GardenLoveMachine.plotOffY[i]] = -1;
 		}
-		else if (GardenLoveMachine.data.plotRecipe[i].shriek) {
-			GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][0+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.data.plotRecipe[i].mother].id;
-			GardenLoveMachine.data.planterPlot[0+GardenLoveMachine.plotOffX[i]][1+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.data.plotRecipe[i].mother].id;
-			GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][1+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.data.plotRecipe[i].mother].id;
-			GardenLoveMachine.data.planterPlot[2+GardenLoveMachine.plotOffX[i]][1+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.data.plotRecipe[i].mother].id;
-			GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][2+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.data.plotRecipe[i].mother].id;
+		else if (GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i].shriek) {
+			GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][0+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].mother].id;
+			GardenLoveMachine.data.planterPlot[0+GardenLoveMachine.plotOffX[i]][1+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].mother].id;
+			GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][1+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].mother].id;
+			GardenLoveMachine.data.planterPlot[2+GardenLoveMachine.plotOffX[i]][1+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].mother].id;
+			GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][2+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].mother].id;
 		}
-		else if (GardenLoveMachine.data.plotRecipe[i].boxcars) {
-			GardenLoveMachine.data.planterPlot[0+GardenLoveMachine.plotOffX[i]][0+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.data.plotRecipe[i].mother].id;
-			GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][0+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.data.plotRecipe[i].mother].id;
-			GardenLoveMachine.data.planterPlot[2+GardenLoveMachine.plotOffX[i]][0+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.data.plotRecipe[i].mother].id;
+		else if (GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i].boxcars) {
+			GardenLoveMachine.data.planterPlot[0+GardenLoveMachine.plotOffX[i]][0+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].mother].id;
+			GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][0+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].mother].id;
+			GardenLoveMachine.data.planterPlot[2+GardenLoveMachine.plotOffX[i]][0+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].mother].id;
 			
-			GardenLoveMachine.data.planterPlot[0+GardenLoveMachine.plotOffX[i]][2+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.data.plotRecipe[i].father].id;
-			GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][2+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.data.plotRecipe[i].father].id;
-			GardenLoveMachine.data.planterPlot[2+GardenLoveMachine.plotOffX[i]][2+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.data.plotRecipe[i].father].id;
+			GardenLoveMachine.data.planterPlot[0+GardenLoveMachine.plotOffX[i]][2+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].father].id;
+			GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][2+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].father].id;
+			GardenLoveMachine.data.planterPlot[2+GardenLoveMachine.plotOffX[i]][2+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].father].id;
 		}
-		else if (!GardenLoveMachine.data.plotRecipe[i].meddleweed) {
-			GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][1+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.data.plotRecipe[i].mother].id;
-			if (!GardenLoveMachine.data.plotRecipe[i].solo) {
-				GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][0+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.data.plotRecipe[i].father].id;
-				GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][2+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.data.plotRecipe[i].father].id;
+		else if (!GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i].meddleweed) {
+			GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][1+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].mother].id;
+			if (!GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i].solo) {
+				GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][0+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].father].id;
+				GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][2+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].father].id;
 			}
 		}
 		
@@ -541,12 +541,12 @@ GardenLoveMachine.launch = function(){
 	//3 = one tick from breeding/breed viable, indicator we want that breed soil
 	GardenLoveMachine.plotGrowCheck = function(i) {
 		var breedViable = false;
-		if (GardenLoveMachine.data.plotRecipe[i].none) {
+		if (GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i].none) {
 			GardenLoveMachine.data.plotState[i] = 0;
 			return;
 		}
 		//only fill is meddleweed so don't breed
-		else if (!GardenLoveMachine.data.plotRecipe[i].fill) {
+		else if (!GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i].fill) {
 			breedViable = GardenLoveMachine.forEachPlotAnd(GardenLoveMachine.tileBreedViable, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
 		}
 		if(breedViable)
