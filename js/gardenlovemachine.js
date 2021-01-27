@@ -113,8 +113,6 @@ GardenLoveMachine.launch = function(){
 			},
 		//everdaisy: 3 tidygrass, 3 elderwort
 			'everdaisy':{
-				valid: function(){return (M.plants['duketater'].unlocked && M.plants['queenbeetLump'].unlocked);},
-				recipeTime: GardenLoveMachine.calculateRecipeTime(['everdaisy', 'tidygrass']),
 				boxcars: true,
 				mother: 'tidygrass',
 				father: 'elderwort'
