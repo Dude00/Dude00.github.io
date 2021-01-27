@@ -22,7 +22,7 @@ GardenLoveMachine.launch = function(){
 			if(CCSE.config.OtherMods.GardenLoveMachine) GardenLoveMachine.data = CCSE.save.OtherMods.GardenLoveMachine;
 		});
 		Game.customOptionsMenu.push(function(){
-			CCSE.AppendCollapsibleOptionsMenu(GardenLoveMachinename, GardenLoveMachinegetMenuString());
+			CCSE.AppendCollapsibleOptionsMenu(GardenLoveMachine.name, GardenLoveMachine.getMenuString());
 		});
 		
 		CCSE.MinigameReplacer(function(){
