@@ -561,12 +561,12 @@ GardenLoveMachine.launch = function(){
 	
 	GardenLoveMachine.plotThink = function(){
 		var M = GardenLoveMachine.M;
-		if(!GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].none){
-			if(M.plants[GardenLoveMachine.data.plotRecipe[i]].unlocked){
-				GardenLoveMachine.data.plotState[i] = 0;
-			}
-		}
 		for (var i = 0; i < 4; i++){
+			if(!GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].none){
+				if(M.plants[GardenLoveMachine.data.plotRecipe[i]].unlocked){
+					GardenLoveMachine.data.plotState[i] = 0;
+				}
+			}
 			switch (GardenLoveMachine.data.plotState[i]) {
 				case 0:
 					GardenLoveMachine.plotStart(i);
