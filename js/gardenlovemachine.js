@@ -420,7 +420,7 @@ GardenLoveMachine.launch = function(){
 	//yell at plots that we found a new seed so do something else
 	GardenLoveMachine.newSeedAlert = function(seed){
 		for (var i = 0; i < 4; i++){
-			if (GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i].key == seed){
+			if (GardenLoveMachine.data.plotRecipe[i].key == seed){
 				GardenLoveMachine.data.plotState[i] = 0;
 			}
 		}
@@ -541,12 +541,12 @@ GardenLoveMachine.launch = function(){
 	//3 = one tick from breeding/breed viable, indicator we want that breed soil
 	GardenLoveMachine.plotGrowCheck = function(i) {
 		var breedViable = false;
-		if (GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i].none) {
+		if (GardenLoveMachine.data.plotRecipe[i].none) {
 			GardenLoveMachine.data.plotState[i] = 0;
 			return;
 		}
 		//only fill is meddleweed so don't breed
-		else if (!GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i].fill) {
+		else if (!GardenLoveMachine.data.plotRecipe[i].fill) {
 			breedViable = GardenLoveMachine.forEachPlotAnd(GardenLoveMachine.tileBreedViable, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
 		}
 		if(breedViable)
