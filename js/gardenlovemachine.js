@@ -264,7 +264,7 @@ GardenLoveMachine.launch = function(){
 		for (var i in GardenLoveMachine.recipes)
 		{
 			if (typeof GardenLoveMachine.recipes[i].valid ==='undefined'){
-				GardenLoveMachine.recipes[i].valid = function(){return (M.plants[i.mother].unlocked && M.plants[i.father].unlocked);};
+				GardenLoveMachine.recipes[i].valid = Function("return (GardenLoveMachine.M.plants["+i.mother+"].unlocked && GardenLoveMachine.M.plants["+ i.father+"].unlocked);");
 			}
 			if (typeof GardenLoveMachine.recipes[i].recipeTime ==='undefined'){
 				GardenLoveMachine.recipes[i].recipeTime = GardenLoveMachine.calculateRecipeTime([i, i.mother, i.father]);
@@ -363,7 +363,7 @@ GardenLoveMachine.launch = function(){
 			
 			plotState: [0, 0, 0, 0],
 			plotRecipe: ['none', 'none', 'none', 'none'],
-			planterPlot: []
+			planterPlot: [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]]
 		}
 	}
 	
@@ -471,7 +471,7 @@ GardenLoveMachine.launch = function(){
 		{
 			var plant = GardenLoveMachine.recipesSorted[i][0];
 			var M = GardenLoveMachine.M;
-			if(GardenLoveMachine.recipes[plant].valid && !M.plants[plant].unlocked){
+			if(GardenLoveMachine.recipes[plant].valid() && !M.plants[plant].unlocked){
 				if(GardenLoveMachine.recipes[plant].none) return plant;
 				var plantCheck = GardenLoveMachine.forEachTile(function(x,y){
 					var M = GardenLoveMachine.M;
