@@ -445,7 +445,7 @@ GardenLoveMachine.launch = function(){
 			var plant = M.plantsById[tile[0] - 1];
 			if (plant.unlocked) {
 				//special meddleweed case
-				if ((!M.plants['brownMold'].unlocked || !!M.plants['crumbspore'].unlocked) && plant.key==['meddleweed']) {
+				if ((!M.plants['brownMold'].unlocked || !M.plants['crumbspore'].unlocked) && plant.key==['meddleweed']) {
 					if (tile[1] + plant.ageTick + plant.ageTickR >= 100){
 						M.clickTile(x,y);
 					}
