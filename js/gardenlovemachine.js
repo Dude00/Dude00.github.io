@@ -106,7 +106,7 @@ GardenLoveMachine.launch = function(){
 			},
 		//shriekbulb: 3 duketater (immature)
 			'shriekbulb':{
-				valid: function(){return (M.plants['duketater'].unlocked},
+				valid: function(){return (M.plants['duketater'].unlocked)},
 				recipeTime: GardenLoveMachine.calculateRecipeTime(['shriekbulb', 'duketater']),
 				shriek: true,
 				mother: 'duketater'
