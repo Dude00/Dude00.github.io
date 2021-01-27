@@ -572,7 +572,7 @@ GardenLoveMachine.launch = function(){
 			return;
 		}
 		//only fill is meddleweed so don't breed
-		else if (!GardenLoveMachine.data.plotRecipe[i].fill) {
+		else if (!GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].fill) {
 			breedViable = GardenLoveMachine.forEachPlotAnd(GardenLoveMachine.tileBreedViable, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
 		}
 		if(breedViable)
