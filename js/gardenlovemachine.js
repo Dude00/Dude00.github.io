@@ -423,7 +423,7 @@ GardenLoveMachine.launch = function(){
 	//yell at plots that we found a new seed so do something else
 	GardenLoveMachine.newSeedAlert = function(seed){
 		for (var i = 0; i < 4; i++){
-			if (GardenLoveMachine.data.plotRecipe[i].key == seed){
+			if (GardenLoveMachine.data.plotRecipe[i] == seed){
 				GardenLoveMachine.data.plotState[i] = 0;
 			}
 		}
@@ -469,7 +469,29 @@ GardenLoveMachine.launch = function(){
 		}
 	}
 	
-	GardenLoveMachine.recipeGet = function(){
+	GardenLoveMachine.recipeGet = function(){ //oh god this is going to be ugly
+		for (var i in GardenLoveMachine.recipesSorted)
+		{
+			var plant = GardenLoveMachine.recipesSorted[i][0];
+			var M = GardenLoveMachine.M;
+			if(GardenLoveMachine.recipes[plant].valid() && !M.plants[plant].unlocked){
+				if(GardenLoveMachine.recipes[plant].none) return plant;
+				var plantCheck = GardenLoveMachine.forEachTile(function(x,y){
+					var M = GardenLoveMachine.M;
+					var tile = M.getTile(x,y);
+					return ((tile[0]-1) == M.plants[plant].id);
+				});
+				if (!plantCheck) {
+					var plotCheck = true;
+					for (var i = 0; i < 4; i++){
+						if (GardenLoveMachine.data.plotRecipe[i] == seed){
+							plotCheck = false;
+						}
+					}
+					if (plotCheck) return plant;
+				}
+			}
+		}
 		for (var i in GardenLoveMachine.recipesSorted)
 		{
 			var plant = GardenLoveMachine.recipesSorted[i][0];
@@ -557,7 +579,7 @@ GardenLoveMachine.launch = function(){
 		else
 			GardenLoveMachine.data.plotState[i] = 2;
 	}
-	//4 = nursing, do nothing until plant is fully grown 
+	//4 = nursing, do nothing until plant is fully grown (clear planting plot)
 	
 	GardenLoveMachine.plotThink = function(){
 		var M = GardenLoveMachine.M;
@@ -578,6 +600,7 @@ GardenLoveMachine.launch = function(){
 					GardenLoveMachine.plotGrowCheck(i);
 					break;
 				case 4:
+					GardenLoveMachine.forEachPlot(function(x,y){GardenLoveMachine.data.planterPlot[x][y] = -1;}, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
 					break;
 				default:
 					break;
