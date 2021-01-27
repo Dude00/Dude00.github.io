@@ -571,8 +571,8 @@ GardenLoveMachine.launch = function(){
 			GardenLoveMachine.data.plotState[i] = 0;
 			return;
 		}
-		//only fill is meddleweed so don't breed
-		else if (!GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].fill) {
+		//meddleweed hates woodchips, also fill doesn't require breeding
+		else if (!GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].fill && !GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].meddleweed) {
 			breedViable = GardenLoveMachine.forEachPlotAnd(GardenLoveMachine.tileBreedViable, GardenLoveMachine.plotOffX[i], GardenLoveMachine.plotOffY[i]);
 		}
 		if(breedViable)
