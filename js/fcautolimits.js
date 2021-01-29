@@ -30,6 +30,9 @@ FCAutoLimit.getBill=function(building, have, budget) {
 
 FCAutoLimit.updateLimits = function(){
 	if(FrozenCookies) {
+		for (var i in Game.buffs) {
+			if (Game.buffs[i].name == 'Devastation') return; //don't do anything if godzamok is doing its thing
+		}
 		if(FrozenCookies.cursorLimit) {
 			var cursorCount = [0,0];
 			var fullCost = 0;
