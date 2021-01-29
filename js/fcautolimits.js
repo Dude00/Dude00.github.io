@@ -44,8 +44,8 @@ FCAutoLimit.updateLimits = function(){
 			var farmCount = [0,0];
 			var fullCost = 0;
 			do{
-				farmCount = FCAutoLimit.getBill('Farm', cursorCount[1], baseClickingCps(FrozenCookies.frenzyClickSpeed)*777*FCAutoLimit.getRuin(farmCount[1])-fullCost);
-				fullCost += cursorCount[0];
+				farmCount = FCAutoLimit.getBill('Farm', farmCount[1], baseClickingCps(FrozenCookies.frenzyClickSpeed)*777*FCAutoLimit.getRuin(farmCount[1])-fullCost);
+				fullCost += farmCount[0];
 			} while(farmCount[0] > 0);
 			FrozenCookies.farmMax = farmCount[1];
 		}
