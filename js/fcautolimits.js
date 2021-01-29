@@ -11,6 +11,21 @@ FCAutoLimit.getRuin = function(sold) {
 	return 1; //
 }
 
+FCAutoLimit.getRawClickCps(clickSpeed) {
+    var clickMod = 1;
+	var cpsMod = 1;
+	for (var i in Game.buffs)
+	{
+		if (typeof Game.buffs[i].multCpS!=='undefined') cpsMod*=Game.buffs[i].multCpS;
+	}
+	for (var i in Game.buffs)
+	{
+		if (typeof Game.buffs[i].multClick != 'undefined') clickMod*=Game.buffs[i].multClick;
+	}
+    var cpc = Game.mouseCps() / (cpsMod * clickMod);
+    return clickSpeed * cpc;
+}
+
 FCAutoLimit.getBill=function(building, have, budget) {
 	var cost=0;
 	var total=0;
@@ -30,14 +45,11 @@ FCAutoLimit.getBill=function(building, have, budget) {
 
 FCAutoLimit.updateLimits = function(){
 	if(FrozenCookies) {
-		for (var i in Game.buffs) {
-			if (Game.buffs[i].name == 'Devastation') return; //don't do anything if godzamok is doing its thing
-		}
 		if(FrozenCookies.cursorLimit) {
 			var cursorCount = [0,0];
 			var fullCost = 0;
 			do{
-				cursorCount = FCAutoLimit.getBill('Cursor', cursorCount[1], baseClickingCps(FrozenCookies.frenzyClickSpeed)*777*FCAutoLimit.getRuin(cursorCount[1])-fullCost);
+				cursorCount = FCAutoLimit.getBill('Cursor', cursorCount[1], FCAutoLimit.getRawClickCps(FrozenCookies.frenzyClickSpeed)*777*FCAutoLimit.getRuin(cursorCount[1])-fullCost);
 				fullCost += cursorCount[0];
 			} while(cursorCount[0] > 0);
 			FrozenCookies.cursorMax = cursorCount[1];
@@ -47,7 +59,7 @@ FCAutoLimit.updateLimits = function(){
 			var farmCount = [0,0];
 			var fullCost = 0;
 			do{
-				farmCount = FCAutoLimit.getBill('Farm', farmCount[1], baseClickingCps(FrozenCookies.frenzyClickSpeed)*777*FCAutoLimit.getRuin(farmCount[1])-fullCost);
+				farmCount = FCAutoLimit.getBill('Farm', farmCount[1], FCAutoLimit.getRawClickCps(FrozenCookies.frenzyClickSpeed)*777*FCAutoLimit.getRuin(farmCount[1])-fullCost);
 				fullCost += farmCount[0];
 			} while(farmCount[0] > 0);
 			FrozenCookies.farmMax = farmCount[1];
