@@ -466,6 +466,20 @@ GardenLoveMachine.launch = function(){
 	}
 	
 	GardenLoveMachine.recipeGet = function(){ //oh god this is going to be ugly
+		var lineCutters = ['meddleweed', 'queenbeetLump'];
+		for (var i in lineCutters)
+		{
+			var plant = lineCutters[i];
+			var M = GardenLoveMachine.M;
+			if(GardenLoveMachine.recipes[plant].valid() && !M.plants[plant].unlocked){
+				var plantCheck = GardenLoveMachine.forEachTile(function(x,y){
+					var M = GardenLoveMachine.M;
+					var tile = M.getTile(x,y);
+					return ((tile[0]-1) == M.plants[plant].id);
+				});
+				if (!plantCheck) return plant;
+			}
+		}
 		for (var i in GardenLoveMachine.recipesSorted)
 		{
 			var plant = GardenLoveMachine.recipesSorted[i][0];
@@ -555,7 +569,12 @@ GardenLoveMachine.launch = function(){
 		else if (!GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].meddleweed) {
 			GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][1+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].mother].id;
 			if (!GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].solo) {
-				GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][0+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].father].id;
+				if(i > 1) {
+					if(GardenLoveMachine.plotRecipe[i-2] != GardenLoveMachine.plotRecipe[i])
+					{
+						GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][0+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].father].id;
+					}
+				}
 				GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][2+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].father].id;
 			}
 		}
@@ -580,7 +599,7 @@ GardenLoveMachine.launch = function(){
 		else
 			GardenLoveMachine.data.plotState[i] = 2;
 	}
-	//4 = nursing, do nothing until plant is fully grown (clear planting plot)
+	//4 = nursing, do nothing until plant is fully grown
 	
 	GardenLoveMachine.plotThink = function(){
 		var M = GardenLoveMachine.M;
