@@ -56,7 +56,7 @@ FCAutoLimit.updateLimits = function(){
 		}
 
 		if(FrozenCookies.farmLimit){
-			var farmCount = [0,0];
+			var farmCount = [0,1];
 			var fullCost = 0;
 			do{
 				farmCount = FCAutoLimit.getBill('Farm', farmCount[1], FCAutoLimit.getRawClickCps(FrozenCookies.frenzyClickSpeed)*777*FCAutoLimit.getRuin(farmCount[1])-fullCost);
