@@ -570,7 +570,7 @@ GardenLoveMachine.launch = function(){
 			GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][1+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].mother].id;
 			if (!GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].solo) {
 				if(i > 1) {
-					if(GardenLoveMachine.plotRecipe[i-2] != GardenLoveMachine.plotRecipe[i])
+					if(GardenLoveMachine.data.plotRecipe[i-2] != GardenLoveMachine.data.plotRecipe[i])
 					{
 						GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][0+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].father].id;
 					}
