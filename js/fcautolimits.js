@@ -11,7 +11,7 @@ FCAutoLimit.getRuin = function(sold) {
 	return 1; //
 }
 
-FCAutoLimit.getRawClickCps(clickSpeed) {
+FCAutoLimit.getRawClickCps = function(clickSpeed){
     var clickMod = 1;
 	var cpsMod = 1;
 	for (var i in Game.buffs)
