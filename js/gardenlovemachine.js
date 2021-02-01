@@ -575,6 +575,10 @@ GardenLoveMachine.launch = function(){
 						GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][0+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].father].id;
 					}
 				}
+				else
+				{
+					GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][0+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].father].id;
+				}
 				GardenLoveMachine.data.planterPlot[1+GardenLoveMachine.plotOffX[i]][2+GardenLoveMachine.plotOffY[i]] = M.plants[GardenLoveMachine.recipes[GardenLoveMachine.data.plotRecipe[i]].father].id;
 			}
 		}
