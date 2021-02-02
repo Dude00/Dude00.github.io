@@ -18,6 +18,16 @@ FCAutoLimit.getRawClickCps = function(clickSpeed){
 	{
 		if (typeof Game.buffs[i].multCpS!=='undefined') cpsMod*=Game.buffs[i].multCpS;
 	}
+	if (Game.Has('Golden switch [off]'))
+	{
+		var goldenSwitchMult=1.5;
+		if (Game.Has('Residual luck'))
+		{
+			var upgrades=Game.goldenCookieUpgrades;
+			for (var i in upgrades) {if (Game.Has(upgrades[i])) goldenSwitchMult+=0.1;}
+		}
+		cpsMod*=goldenSwitchMult;
+	}
 	for (var i in Game.buffs)
 	{
 		if (typeof Game.buffs[i].multClick != 'undefined') clickMod*=Game.buffs[i].multClick;
