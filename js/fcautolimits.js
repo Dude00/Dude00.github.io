@@ -57,7 +57,7 @@ FCAutoLimit.updateLimits = function(){
 	if(FrozenCookies) {
 		if(FrozenCookies.cursorLimit) {
 			var cursorCount = [0,0];
-			var fullCost = 0;
+			var fullCost = -Game.Objects['Cursor'].getReverseSumPrice(Game.Objects['Cursor'].amount);
 			do{
 				cursorCount = FCAutoLimit.getBill('Cursor', cursorCount[1], FCAutoLimit.getRawClickCps(FrozenCookies.frenzyClickSpeed)*777*FCAutoLimit.getRuin(cursorCount[1])-fullCost);
 				fullCost += cursorCount[0];
@@ -67,7 +67,7 @@ FCAutoLimit.updateLimits = function(){
 
 		if(FrozenCookies.farmLimit){
 			var farmCount = [0,1];
-			var fullCost = 0;
+			var fullCost = -Game.Objects['Farm'].getReverseSumPrice(Game.Objects['Farm'].amount-1);
 			do{
 				farmCount = FCAutoLimit.getBill('Farm', farmCount[1], FCAutoLimit.getRawClickCps(FrozenCookies.frenzyClickSpeed)*777*FCAutoLimit.getRuin(farmCount[1])-fullCost);
 				fullCost += farmCount[0];
