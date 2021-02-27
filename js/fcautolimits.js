@@ -70,7 +70,7 @@ FCAutoLimit.updateLimits = function(){
 				cursorCount++;
 				curMax = base*FCAutoLimit.getRawRuin(cursorCount)+sellBonus-FCAutoLimit.getSumPrice('Cursor', cursorCount);
 			} while(curMax >= maxMax);
-			FrozenCookies.cursorMax = cursorCount[1]-1;
+			FrozenCookies.cursorMax = cursorCount-1;
 		}
 
 		if(FrozenCookies.farmLimit){
@@ -83,7 +83,7 @@ FCAutoLimit.updateLimits = function(){
 				farmCount++;
 				curMax = base*FCAutoLimit.getRawRuin(farmCount)+sellBonus-FCAutoLimit.getSumPrice('Farm', farmCount);
 			} while(curMax >= maxMax);
-			FrozenCookies.farmMax = farmCount[1]-1;
+			FrozenCookies.farmMax = farmCount-1;
 		}
 	}
 }
