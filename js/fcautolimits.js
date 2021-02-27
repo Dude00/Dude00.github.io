@@ -11,6 +11,17 @@ FCAutoLimit.getRuin = function(sold) {
 	return 1; //
 }
 
+FCAutoLimit.getRawRuin = function(sold) {
+	if (Game.hasGod)
+	{
+		var godLvl=Game.hasGod('ruin');
+		if (godLvl==1) return sold*0.01;
+		else if (godLvl==2) return sold*0.005;
+		else if (godLvl==3) return sold*0.0025;
+	}
+	return 1; //
+}
+
 FCAutoLimit.getRawClickCps = function(clickSpeed){
     var clickMod = 1;
 	var cpsMod = 1;
@@ -36,43 +47,43 @@ FCAutoLimit.getRawClickCps = function(clickSpeed){
     return clickSpeed * cpc;
 }
 
-FCAutoLimit.getBill=function(building, have, budget) {
-	var cost=0;
-	var total=0;
-	var price = 0;
-	do
+FCAutoLimit.getSumPrice=function(building, amount) {
+	var price=0;
+	for (var i=0;i<amount;i++)
 	{
-		total++;
-		price = Game.Objects[building].basePrice*Math.pow(Game.priceIncrease,Math.max(0,have-Game.Objects[building].free));
-		price = Math.ceil(Game.modifyBuildingPrice(Game.Objects[building],price));
-		cost += price;
-		have++;
+		price+=Game.Objects[building].basePrice*Math.pow(Game.priceIncrease,Math.max(0,i-Game.Objects[building].free));
 	}
-	while(budget > cost);
-	
-	return [cost-price,have-1]
+	price=Game.modifyBuildingPrice(Game.Objects[building],price);
+	return Math.ceil(price);
 }
 
 FCAutoLimit.updateLimits = function(){
 	if(FrozenCookies) {
+		var base = FCAutoLimit.getRawClickCps(FrozenCookies.frenzyClickSpeed)*777*10;
 		if(FrozenCookies.cursorLimit) {
-			var cursorCount = [0,0];
-			var fullCost = -Game.Objects['Cursor'].getReverseSumPrice(Game.Objects['Cursor'].amount);
+			var cursorCount = 0;
+			var sellBonus = Game.Objects['Cursor'].getReverseSumPrice(Game.Objects['Cursor'].amount);
+			var maxMax = 0;
+			var curMax = 0;
 			do{
-				cursorCount = FCAutoLimit.getBill('Cursor', cursorCount[1], FCAutoLimit.getRawClickCps(FrozenCookies.frenzyClickSpeed)*777*FCAutoLimit.getRuin(cursorCount[1])-fullCost);
-				fullCost += cursorCount[0];
-			} while(cursorCount[0] > 0);
-			FrozenCookies.cursorMax = cursorCount[1];
+				maxMax = curMax;
+				cursorCount++;
+				curMax = base*FCAutoLimit.getRawRuin(cursorCount)+sellBonus-FCAutoLimit.getSumPrice('Cursor', cursorCount);
+			} while(curMax >= maxMax);
+			FrozenCookies.cursorMax = cursorCount[1]-1;
 		}
 
 		if(FrozenCookies.farmLimit){
-			var farmCount = [0,1];
-			var fullCost = -Game.Objects['Farm'].getReverseSumPrice(Game.Objects['Farm'].amount-1);
+			var farmCount = 1;
+			var sellBonus = Game.Objects['Farm'].getReverseSumPrice(Game.Objects['Farm'].amount-1);
+			var maxMax = 0;
+			var curMax = 0;
 			do{
-				farmCount = FCAutoLimit.getBill('Farm', farmCount[1], FCAutoLimit.getRawClickCps(FrozenCookies.frenzyClickSpeed)*777*FCAutoLimit.getRuin(farmCount[1])-fullCost);
-				fullCost += farmCount[0];
-			} while(farmCount[0] > 0);
-			FrozenCookies.farmMax = farmCount[1];
+				maxMax = curMax;
+				farmCount++;
+				curMax = base*FCAutoLimit.getRawRuin(farmCount)+sellBonus-FCAutoLimit.getSumPrice('Farm', farmCount);
+			} while(curMax >= maxMax);
+			FrozenCookies.farmMax = farmCount[1]-1;
 		}
 	}
 }
