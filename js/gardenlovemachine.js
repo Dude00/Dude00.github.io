@@ -614,6 +614,9 @@ GardenLoveMachine.launch = function(){
 					return;
 				}
 			}
+			else{
+				GardenLoveMachine.data.plotState[i] = 0;
+			}
 			switch (GardenLoveMachine.data.plotState[i]) {
 				case 0:
 					GardenLoveMachine.plotStart(i, true);

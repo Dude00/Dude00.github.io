@@ -85,6 +85,32 @@ FCAutoLimit.updateLimits = function(){
 			} while(curMax >= maxMax);
 			FrozenCookies.farmMax = farmCount-1;
 		}
+		
+		if(FrozenCookies.mineLimit){
+			var farmCount = 1;
+			var sellBonus = Game.Objects['Mine'].getReverseSumPrice(Game.Objects['Mine'].amount-1);
+			var maxMax = 0;
+			var curMax = 0;
+			do{
+				maxMax = curMax;
+				farmCount++;
+				curMax = base*FCAutoLimit.getRawRuin(farmCount)+sellBonus-FCAutoLimit.getSumPrice('Mine', farmCount);
+			} while(curMax >= maxMax);
+			FrozenCookies.mineMax = farmCount-1;
+		}
+		
+		if(FrozenCookies.factoryLimit){
+			var farmCount = 1;
+			var sellBonus = Game.Objects['Factory'].getReverseSumPrice(Game.Objects['Factory'].amount-1);
+			var maxMax = 0;
+			var curMax = 0;
+			do{
+				maxMax = curMax;
+				farmCount++;
+				curMax = base*FCAutoLimit.getRawRuin(farmCount)+sellBonus-FCAutoLimit.getSumPrice('Factory', farmCount);
+			} while(curMax >= maxMax);
+			FrozenCookies.factoryMax = farmCount-1;
+		}
 	}
 }
 
