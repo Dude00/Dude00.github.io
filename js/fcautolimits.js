@@ -58,7 +58,7 @@ FCAutoLimit.getSumPrice=function(building, amount) {
 }
 
 FCAutoLimit.updateLimits = function(){
-	if(FrozenCookies) {
+	if(FrozenCookies && !Game.hasBuff('Cursed finger')) { //the finger ruins everything
 		var base = FCAutoLimit.getRawClickCps(FrozenCookies.frenzyClickSpeed)*777*10;
 		if(FrozenCookies.cursorLimit) {
 			var cursorCount = 0;
